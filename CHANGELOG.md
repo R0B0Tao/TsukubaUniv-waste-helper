@@ -1,54 +1,52 @@
 # Changelog
 
-## beta-v14.2
+This project is currently in beta. During the beta stage, each functional iteration increases the version number by 0.1.
 
-Hotfix for language auto-detection.
+The previous `v14.2` numbering has been reset and reorganized as `beta v1.4`.
 
-- Restored first-load browser/device language detection.
-- Manual language choices are now stored under a new key only after the user clicks a language button.
-- Old beta local-storage values from earlier builds are ignored, so previous testing sessions no longer force the interface into a stale language.
+## beta v1.4
 
-## beta-v14.1
+Added optional composition ratio input for mixed waste solutions.
 
-Released as the current beta for lab testing.
+- Added optional ratio fields after the user enters mixed waste components.
+- Supported percentage-based, volume-based, and mass-based ratio inputs.
+- Enabled dynamic ratio input fields based on the number of detected components.
+- Improved mixed-solution classification accuracy by allowing ratio information to be included in the judgment.
+- Updated the main instruction text across Chinese, Japanese, and English pages to ask users to enter reagent names or mixed waste components for searching.
 
-### UI
+## beta v1.3
 
-- Made the header non-sticky and reduced its height so it no longer covers page content.
-- Moved language buttons to the upper-right area of the header on both desktop and mobile.
-- Changed the shortcut label from “Go to search” to “Search”.
-- Kept the mobile shortcut bar as a full-width sticky bottom bar.
-- Changed the desktop shortcut area to a compact floating block at the lower-right corner.
-- Added an `▲` button to return to the top of the page.
-- Fixed the Japanese `フィードバック` button clipping in the desktop floating shortcut block.
+Improved mobile interaction and result display.
 
-### Classification and ratio logic
+- Unified the search entry for single reagents and mixed waste solutions.
+- Removed the separated search modes for single reagents and mixed reagents.
+- Moved the search button next to the input box for better mobile usability.
+- Added Enter-key search support.
+- Replaced the common reagents section with local user search history.
+- Made the search history follow the selected page language.
+- Separated search results clearly into Chinese, Japanese, and English sections.
 
-- Reframed the tool as a helper for waste liquids already confirmed as liquid experimental waste.
-- Stopped treating mass units such as `g`, `mg`, and `kg` as automatic solid-waste indicators.
-- Mass units are now treated as concentration information. High mass/volume values trigger a warning instead of direct classification.
-- Aqueous solutions such as `PFA`, `formalin`, `NaOH`, `HCl`, `PBS`, and buffers are counted as aqueous liquid when entered with volume units.
-- Organic solvent water content is estimated from the final liquid composition when volume or percentage ratios are provided.
-- Halogenated solvent classification now uses the provided final-composition ratio when available, so low-percentage chloroform/DCM mixtures are not automatically forced into the halogenated category.
-- Added a two-phase separation condition. When selected, the result asks the user to separate phases and classify them individually.
+## beta v1.2
 
-### Examples covered
+Improved waste classification logic.
 
-- `60 g PFA + 40 mL MilliQ` now triggers a high-concentration warning and asks for confirmation instead of automatically treating it as ordinary liquid waste.
-- `60 mL PFA + 40 mL NaOH` is treated as an aqueous liquid mixture containing an organic/formaldehyde component.
-- `80 mL EtOH + 20 mL water` is treated as general organic solvent waste because water is below 40%.
-- `60 mL EtOH + 40 mL water` is treated as aqueous organic solvent waste.
-- `95 mL EtOH + 5 mL chloroform` triggers halogenated solvent waste by the 5% threshold.
+- Added support for mixed waste input, rather than only single-reagent input.
+- Updated the classification logic so the system shows only the highest-priority waste category.
+- Reduced ambiguous multi-category results to make the output easier for users to follow.
 
-### Feedback
+## beta v1.1
 
-- The embedded Google Form remains connected.
-- Auto-filled fields remain unchanged:
-  - `entry.569030736`: app version
-  - `entry.2127042998`: page language
-  - `entry.146557326`: search input
-  - `entry.655882921`: displayed result
+Added multilingual page support.
 
-### Notes
+- Added Chinese, Japanese, and English page language options.
+- Localized the main title, description, search button, result labels, and user-facing prompts.
+- Prepared the interface structure for future multilingual result display.
 
-This tool is still a sorting aid only. Final disposal decisions should follow SDS, laboratory SOP, and the latest University of Tsukuba instructions.
+## beta v1.0
+
+Created the initial waste-liquid classification search page.
+
+- Added the basic reagent input field.
+- Added the first search and classification result display area.
+- Added the initial built-in classification rule structure.
+- Added the basic Chinese user interface for waste-liquid sorting assistance.
