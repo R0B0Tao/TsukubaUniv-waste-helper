@@ -34,10 +34,6 @@ entry.146557326  search input
 entry.655882921  displayed result
 ```
 
-Changing the order of questions in Google Forms does not require changing these IDs. Regenerate the pre-filled link only if an auto-filled question is deleted and recreated, or if the form itself is replaced.
-
-The “Expected category” question in the form can be made optional. That is usually enough for beta testing and avoids extra branching logic.
-
 ## GitHub Pages
 
 Expected public URL:
@@ -45,15 +41,6 @@ Expected public URL:
 ```text
 https://r0b0tao.github.io/TsukubaUniv-waste-helper/
 ```
-
-If the URL returns 404 after the first commit, enable Pages in repository settings:
-
-1. Repository Settings.
-2. Pages.
-3. Source: Deploy from a branch.
-4. Branch: `main`, folder: `/ (root)`.
-5. Save.
-
 A GitHub Actions workflow is also included for Pages deployment where workflow-based Pages is enabled.
 
 ## Editing aliases
