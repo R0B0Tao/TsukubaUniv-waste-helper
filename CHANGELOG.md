@@ -2,8 +2,6 @@
 
 This project is currently in beta. During the beta stage, each functional iteration increases the version number by 0.1.
 
-The previous `v14.2` numbering has been reset and reorganized as `beta v1.4`.
-
 ## beta v1.4
 
 Added optional composition ratio input for mixed waste solutions.
