@@ -25,15 +25,6 @@ The current Google Form is wired in `index.html`:
 https://docs.google.com/forms/d/e/1FAIpQLScsgbzODHKkEoAtLp0RveVNZKgzeimLg5iLHHV0LB6f8bbO9A/viewform
 ```
 
-Auto-filled fields:
-
-```text
-entry.569030736  app version
-entry.2127042998 page language
-entry.146557326  search input
-entry.655882921  displayed result
-```
-
 ## GitHub Pages
 
 Expected public URL:
@@ -41,10 +32,3 @@ Expected public URL:
 ```text
 https://r0b0tao.github.io/TsukubaUniv-waste-helper/
 ```
-A GitHub Actions workflow is also included for Pages deployment where workflow-based Pages is enabled.
-
-## Editing aliases
-
-Most aliases are in the `R` array inside `index.html`. Add common lab names there first, especially abbreviations used by students and international researchers.
-
-Important examples already included include `MQ`, `MilliQ`, `dH2O`, `ddH2O`, `DI water`, `ultrapure water`, `精製水`, `超纯水`, and related water names.
