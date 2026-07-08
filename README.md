@@ -2,6 +2,8 @@
 
 Mobile-first beta web app for quick experimental waste-liquid sorting in an international laboratory environment.
 
+Current release: `beta-v12`.
+
 This tool is based on the University of Tsukuba waste-management guideline supplied during development. It is a sorting aid only. Final disposal should follow SDS, laboratory SOP, and the latest university instructions.
 
 ## Current beta features
@@ -12,7 +14,7 @@ This tool is based on the University of Tsukuba waste-management guideline suppl
 - Recommended mixture separator: `+`, for example `ethanol + chloroform`.
 - Optional composition fields for percentages, volume, mass, and simple solid-liquid preparations.
 - Local search history stored only in the user's current browser.
-- Embedded Google Form feedback with auto-filled version, page language, search input, and displayed result.
+- Embedded Google Form feedback with auto-filled app version, page language, search input, and displayed result.
 - Copy/download JSON fallback if the embedded form cannot load.
 
 ## Feedback form
