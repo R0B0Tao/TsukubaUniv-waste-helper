@@ -1,5 +1,13 @@
 # Changelog
 
+## beta-v14.2
+
+Hotfix for language auto-detection.
+
+- Restored first-load browser/device language detection.
+- Manual language choices are now stored under a new key only after the user clicks a language button.
+- Old beta local-storage values from earlier builds are ignored, so previous testing sessions no longer force the interface into a stale language.
+
 ## beta-v14.1
 
 Released as the current beta for lab testing.
