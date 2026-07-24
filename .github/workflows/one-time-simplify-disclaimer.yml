@@ -1,0 +1,64 @@
+name: One-time simplify beta disclaimer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/one-time-simplify-disclaimer.yml
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply approved disclaimer simplification
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          s = re.sub(
+              r'\.disclaimer-head\{[^}]+\}\.disclaimer-badge\{[^}]+\}\n\.disclaimer h2\{[^}]+\}\.disclaimer-main\{[^}]+\}\.disclaimer-sub\{[^}]+\}',
+              '.disclaimer-line{display:flex;gap:10px;align-items:flex-start}.disclaimer-badge{display:inline-flex;align-items:center;min-height:28px;padding:0 9px;border-radius:999px;background:#9a3412;color:#fff;font-size:12px;font-weight:900;letter-spacing:.02em;flex:0 0 auto}\n.disclaimer-main{margin:2px 0 0;color:#431407;font-weight:750}',
+              s,
+              count=1,
+          )
+          s = re.sub(r'\n\.result-disclaimer\{[^}]+\}', '', s, count=1)
+
+          s = re.sub(
+              r'  <section class="panel disclaimer" aria-labelledby="disclaimerTitle">\n    <div class="disclaimer-head"><span class="disclaimer-badge">BETA</span><h2 id="disclaimerTitle" data-i="noticeTitle"></h2></div>\n    <p class="disclaimer-main" data-i="noticeText"></p>\n    <p class="disclaimer-sub" data-i="noticeAffiliation"></p>\n  </section>',
+              '  <section class="panel disclaimer" aria-label="Beta notice">\n    <div class="disclaimer-line"><span class="disclaimer-badge">BETA</span><p class="disclaimer-main" data-i="noticeText"></p></div>\n  </section>',
+              s,
+              count=1,
+          )
+
+          replacements = {
+              "    noticeTitle:'非公式ベータ版について',\n    noticeText:'本アプリは、実験廃液の分類を補助するための非公式ベータ版ツールです。本アプリが提供するすべての結果よりも、大学および各研究室の正式な廃棄物処理規則が優先されます。',\n    noticeAffiliation:'本ツールは筑波大学が提供または承認する公式サービスではありません。判断に迷う場合は、廃棄前に研究室の管理責任者または公式ガイドラインを確認してください。',\n    resultNotice:'非公式ベータ版：最終判断は大学・研究室の正式な規則に従ってください。',": "    noticeText:'本アプリは非公式のベータ版補助ツールであり、表示結果よりも大学および研究室の正式な廃棄物処理規則が優先されます。',",
+              "    noticeTitle:'Unofficial Beta Notice',\n    noticeText:'This application is an unofficial beta support tool for laboratory waste classification. Official university and laboratory waste disposal regulations take precedence over all results provided by this application.',\n    noticeAffiliation:'It is not an official service provided or endorsed by the University of Tsukuba. When in doubt, consult your laboratory supervisor or the official guidelines before disposal.',\n    resultNotice:'Unofficial beta tool — official university and laboratory regulations take precedence.',": "    noticeText:'This is an unofficial beta support tool, and official university and laboratory waste disposal regulations take precedence over all results provided by this application.',",
+              "    noticeTitle:'非官方 Beta 版说明',\n    noticeText:'本应用是用于辅助实验废液分类的非官方 Beta 工具。本应用提供的所有结果均不得取代学校及各实验室的正式废弃物处理规定。',\n    noticeAffiliation:'本工具并非筑波大学提供或认可的官方服务。如有疑问，请在处置前向实验室管理负责人确认，或查阅正式指南。',\n    resultNotice:'非官方 Beta 工具：最终判断以学校和实验室的正式规定为准。',": "    noticeText:'本应用是非官方 Beta 辅助工具，所有查询结果均以学校及实验室的正式废弃物处理规定为准。',",
+              "</article></div><p class=\"result-disclaimer\">${esc(t('resultNotice'))}</p>`;prepareFeedback()": "</article></div>`;prepareFeedback()",
+          }
+          for old, new in replacements.items():
+              if old not in s:
+                  raise SystemExit(f'Expected text not found: {old[:80]}')
+              s = s.replace(old, new, 1)
+
+          if 'result-disclaimer' in s or 'noticeTitle' in s or 'noticeAffiliation' in s or 'resultNotice' in s:
+              raise SystemExit('Duplicate disclaimer remnants remain')
+
+          p.write_text(s, encoding='utf-8')
+          PY
+
+          rm .github/workflows/one-time-simplify-disclaimer.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/one-time-simplify-disclaimer.yml
+          git commit -m "Simplify unofficial beta disclaimer"
+          git push
